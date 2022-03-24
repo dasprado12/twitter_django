@@ -6,6 +6,6 @@ The idea of this projects is to learn django framework creating a simple project
 ## How to run
 
     pipenv install
-    cd /twitter
+    cd twitter/
     python manage.py runserver
 
