@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+
+{% extends 'base.html' %}
+
+{% block title %}Twitter{% endblock %}
+    
+{% block content %}
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+              <div class="modal-header">
+                <a href="/feed/tweet/{{ tweet_id }}" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</a>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+              </div>
+              <div class="modal-body">
+                    {% if username_like_list %}
+                        {% for u in username_like_list %}
+                        <p>{{ u }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p> Não há curtidas </p>
+                    {% endif %}
+              </div>
+              <div class="modal-footer">
+              </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+
+{% extends 'base.html' %}
+
+{% block title %}Twitter{% endblock %}
+
+{% block extra_js%}
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+{% endblock %}
+
+{% block content %}
+
+
+<main class="container">
+    <div class="card pb-5 pl-5 pt-5 pr-5">
+        <div class="card-title">
+            <a href="/feed/" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</a>
+        </div>
+            <div class"card-body">
+                <div class="card-title">
+                    {{ tweet.text }}
+                </div>
+                <p class="card-footer text">
+                    {{ tweet.created }}
+                </p>
+                <div>
+
+                    <a class="btn fa-solid" href="/feed/like/list/{{ tweet.id }}"> {{ tweet.likes }} Curtidas </a>
+                    <a class="btn fa-solid fa-comment" href="/feed/like_list/{{ tweet.id }}"> {{ tweet.comments }} </a>
+                </div>
+            </div>
+            <div card="card-body">
+                {% if tweet.comments %}
+                    {% for comment in tweet.comments_list %}
+                        <div class="pt-5">
+                            {{ comment.text }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                <div class="pt-5">
+                    <p> Não há comentários </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

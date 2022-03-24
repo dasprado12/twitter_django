@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+
+{% extends 'base.html' %}
+
+{% block title %}Twitter{% endblock %}
+    
+{% block content %}
+
+
+    <main class="container">
+        <class>
+            <form class="ui form" action="/feed/add" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">What are you feeling?</label>
+                    <textarea class="form-control" name="text" type="text" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>   
+        </class>
+        {% for tweet in tweet_list %}
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <p class="card-title">
+                    @{{ tweet.user_id.username }}
+                </p>
+                <div class="card pb-3 pl-3 pt-3 pr-3">
+                    <a class="card-text" href="/feed/tweet/{{ tweet.id }}">
+                        {{ tweet.text }}
+                    </a>
+                </div>
+            </div>
+            <div>
+                <span class="mb-3">
+                    <a class="btn fa-solid fa-heart" href="/feed/like/{{ tweet.id }}"> {{ tweet.likes }} </a>
+                    <button class="btn fa-solid fa-comment"> {{ tweet.comments }} </button>
+                </span>
+            </div>
+            <div class="card-footer container">
+                <div class="row">
+                    <div class="col">
+                        {{ tweet.created }} 
+                    </div>
+                    <div class="col text-end">
+                        {% if user.id == tweet.user_id.id %}
+                        <a class="btn btn-danger small" href="delete/{{ tweet.id }}">delete</a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </main>
+{% endblock %}
