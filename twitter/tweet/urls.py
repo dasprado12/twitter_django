@@ -12,4 +12,5 @@ urlpatterns = [
     path('delete/<int:tweet_id>', views.delete, name="delete"),
     path('like/<int:tweet_id>', views.like_tweet, name="like"),
     path('like/list/<int:tweet_id>', views.tweet_like_list, name="like_list"),
+    path('comment/<int:tweet_id>', views.comment_tweet, name="comment")
 ]

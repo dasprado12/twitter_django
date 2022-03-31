@@ -25,16 +25,40 @@
                     {{ tweet.created }}
                 </p>
                 <div>
-
                     <a class="btn fa-solid" href="/feed/like/list/{{ tweet.id }}"> {{ tweet.likes }} Curtidas </a>
                     <a class="btn fa-solid fa-comment" href="/feed/like_list/{{ tweet.id }}"> {{ tweet.comments }} </a>
                 </div>
             </div>
             <div card="card-body">
+                <div class="card-text">
+                    <form class="ui form" action="/feed/comment/{{ tweet.id }}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <textarea class="form-control" name="text" type="text" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </form> 
+                </div>
                 {% if tweet.comments %}
                     {% for comment in tweet.comments_list %}
-                        <div class="pt-5">
-                            {{ comment.text }}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    @{{ comment.user }}
+                                </div>
+                                <div class="card-text">
+                                    {{ comment.text }}
+                                </div>
+                                <div class="card-action">
+                                    {% if user.id == comment.user.id %}
+                                        <a class="small btn btn-danger"> delete </a>
+                                    {% else %}
+                                        
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     {% endfor %}
                 {% else %}
